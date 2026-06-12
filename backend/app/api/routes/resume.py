@@ -75,22 +75,18 @@ async def upload_resume(
             detail=f"AI analysis failed: {str(e)}",
         )
 
-    resume = Resume(
-        user_id=TEST_USER_ID,
-        filename=file.filename,
-        raw_text=raw_text,
-        ats_score=analysis["ats_score"],
-        skills=analysis["skills"],
-        strengths=analysis["strengths"],
-        weaknesses=analysis["weaknesses"],
-        recommendations=analysis["recommendations"],
-    )
-
-    db.add(resume)
-    db.commit()
-    db.refresh(resume)
-
-    return resume
+    return {
+    "id": "temp",
+    "user_id": "temp",
+    "filename": file.filename,
+    "raw_text": raw_text,
+    "ats_score": analysis["ats_score"],
+    "skills": analysis["skills"],
+    "strengths": analysis["strengths"],
+    "weaknesses": analysis["weaknesses"],
+    "recommendations": analysis["recommendations"],
+    "created_at": None,
+}
 
 
 @router.get("/latest", response_model=ResumeResponse)
