@@ -7,6 +7,8 @@ from app.db.session import get_db
 from app.models.resume import Resume
 from app.schemas.resume import ResumeResponse
 from app.services.resume_ai import analyze_resume
+from uuid import uuid4
+from datetime import datetime
 
 router = APIRouter()
 
@@ -75,17 +77,18 @@ async def upload_resume(
             detail=f"AI analysis failed: {str(e)}",
         )
 
-    return {
-    "id": "temp",
-    "user_id": "temp",
+    from uuid import uuid4
+    from datetime import datetime
+
+     return {
+    "id": str(uuid4()),
     "filename": file.filename,
-    "raw_text": raw_text,
     "ats_score": analysis["ats_score"],
     "skills": analysis["skills"],
     "strengths": analysis["strengths"],
     "weaknesses": analysis["weaknesses"],
     "recommendations": analysis["recommendations"],
-    "created_at": None,
+    "created_at": datetime.utcnow(),
 }
 
 
