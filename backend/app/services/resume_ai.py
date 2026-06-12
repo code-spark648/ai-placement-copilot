@@ -6,9 +6,17 @@ from google import genai
 
 load_dotenv()
 
+
 API_KEY = os.getenv("GEMINI_API_KEY")
 
+print("GEMINI KEY FOUND:", API_KEY is not None)
+
+if API_KEY:
+    print("GEMINI KEY PREFIX:", API_KEY[:15])
+
 client = genai.Client(api_key=API_KEY)
+
+
 
 
 async def analyze_resume(resume_text: str):
