@@ -4,16 +4,10 @@ import io
 import PyPDF2
 
 from app.db.session import get_db
-from app.models.resume import Resume
 from app.schemas.resume import ResumeResponse
 from app.services.resume_ai import analyze_resume
-from uuid import uuid4
-from datetime import datetime
 
 router = APIRouter()
-
-
-TEST_USER_ID = "03a51718-827c-47ad-a6a3-0e8f155eea15"
 
 
 def extract_text_from_pdf(file_bytes: bytes) -> str:
@@ -59,7 +53,7 @@ async def upload_resume(
         if not raw_text or len(raw_text) < 50:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Could not extract meaningful text from PDF. Ensure the PDF is not scanned/image-based.",
+                detail="Could not extract meaningful text from PDF.",
             )
 
     except ValueError as e:
@@ -77,48 +71,25 @@ async def upload_resume(
             detail=f"AI analysis failed: {str(e)}",
         )
 
-    from uuid import uuid4
-    from datetime import datetime
-
-     return {
-    "id": str(uuid4()),
-    "filename": file.filename,
-    "ats_score": analysis["ats_score"],
-    "skills": analysis["skills"],
-    "strengths": analysis["strengths"],
-    "weaknesses": analysis["weaknesses"],
-    "recommendations": analysis["recommendations"],
-    "created_at": datetime.utcnow(),
-}
+    return {
+        "id": "11111111-1111-1111-1111-111111111111",
+        "filename": file.filename,
+        "ats_score": analysis["ats_score"],
+        "skills": analysis["skills"],
+        "strengths": analysis["strengths"],
+        "weaknesses": analysis["weaknesses"],
+        "recommendations": analysis["recommendations"],
+        "created_at": "2026-06-12T12:00:00",
+    }
 
 
-@router.get("/latest", response_model=ResumeResponse)
-async def get_latest_resume(
-    db: Session = Depends(get_db),
-):
-    resume = (
-        db.query(Resume)
-        .filter(Resume.user_id == TEST_USER_ID)
-        .order_by(Resume.created_at.desc())
-        .first()
-    )
-
-    if not resume:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="No resume found",
-        )
-
-    return resume
+@router.get("/latest")
+async def get_latest_resume():
+    return {
+        "message": "Temporary endpoint"
+    }
 
 
-@router.get("/all", response_model=list[ResumeResponse])
-async def get_all_resumes(
-    db: Session = Depends(get_db),
-):
-    return (
-        db.query(Resume)
-        .filter(Resume.user_id == TEST_USER_ID)
-        .order_by(Resume.created_at.desc())
-        .all()
-    )
+@router.get("/all")
+async def get_all_resumes():
+    return []
