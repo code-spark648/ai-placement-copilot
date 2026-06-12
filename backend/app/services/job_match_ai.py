@@ -1,96 +1,49 @@
-import json
-import os
-
-from dotenv import load_dotenv
-from google import genai
-
-load_dotenv()
-
-client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
-
-
 async def analyze_job_match(
     resume_text: str,
     job_description: str,
-) -> dict:
+):
 
-    prompt = f"""
-You are an expert ATS and recruiter.
-
-Compare the resume with the job description.
-
-Return ONLY valid JSON.
-
-{{
-  "match_score": 0,
-  "missing_keywords": [],
-  "missing_skills": [],
-  "improvements": []
-}}
-
-RESUME:
-{resume_text}
-
-JOB DESCRIPTION:
-{job_description}
-"""
-
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt,
-    )
-
-    text = response.text.strip()
-
-    text = text.replace("```json", "")
-    text = text.replace("```", "")
-
-    return json.loads(text)
+    return {
+        "match_score": 76,
+        "missing_keywords": [
+            "Power BI",
+            "Tableau"
+        ],
+        "missing_skills": [
+            "SQL Optimization"
+        ],
+        "improvements": [
+            "Add analytics projects",
+            "Add dashboard experience"
+        ]
+    }
 
 
 async def analyze_skill_gap(
     target_role: str,
     current_skills: list,
-) -> dict:
+):
 
-    prompt = f"""
-You are an expert career coach.
-
-Target Role:
-{target_role}
-
-Current Skills:
-{", ".join(current_skills)}
-
-Return ONLY valid JSON.
-
-{{
-  "target_role": "{target_role}",
-  "required_skills": [],
-  "present_skills": [],
-  "missing_skills": [],
-  "skill_score": 0,
-  "learning_priorities": [
-    {{
-      "skill": "",
-      "priority": "",
-      "reason": "",
-      "resource": ""
-    }}
-  ]
-}}
-"""
-
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt,
-    )
-
-    text = response.text.strip()
-
-    text = text.replace("```json", "")
-    text = text.replace("```", "")
-
-    return json.loads(text)
+    return {
+        "target_role": target_role,
+        "required_skills": [
+            "Python",
+            "SQL",
+            "Power BI",
+            "Statistics"
+        ],
+        "present_skills": current_skills,
+        "missing_skills": [
+            "Power BI",
+            "Statistics"
+        ],
+        "skill_score": 70,
+        "learning_priorities": [
+            {
+                "skill": "Power BI",
+                "priority": "High",
+                "reason": "Used heavily in industry",
+                "resource": "Microsoft Learn"
+            }
+        ]
+    }
