@@ -1,73 +1,178 @@
-# React + TypeScript + Vite
+# AI Placement Copilot 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AI Placement Copilot is a full-stack career preparation platform designed to help students prepare for internships and placements through AI-powered career guidance tools.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### 📄 Resume Analyzer
 
-## React Compiler
+* Upload PDF resumes
+* ATS score analysis
+* Skill extraction
+* Strengths and weaknesses identification
+* Personalized recommendations
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🎯 Job Match Analyzer
 
-## Expanding the ESLint configuration
+* Compare resume against job descriptions
+* Match score calculation
+* Missing skills identification
+* Missing keyword detection
+* Improvement suggestions
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 📈 Skill Gap Analysis
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* Analyze current skills against target roles
+* Identify missing competencies
+* Generate learning priorities
+* Career readiness assessment
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 🛣 Personalized Learning Roadmap
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* Generate structured 8-week learning plans
+* Customized based on target role
+* Weekly goals and milestones
+* Project recommendations
+* Interview preparation guidance
+
+### 🎤 Interview Preparation
+
+* Generate technical interview questions
+* Behavioral interview questions
+* HR interview questions
+* Answer evaluation and feedback
+
+---
+
+## Tech Stack
+
+### Frontend
+
+* React
+* TypeScript
+* Vite
+* Axios
+
+### Backend
+
+* FastAPI
+* Python
+* SQLAlchemy
+* Pydantic
+
+### Database
+
+* PostgreSQL
+
+### Deployment
+
+* Frontend: Vercel
+* Backend: Render
+
+### AI Integration
+
+* Google Gemini API
+
+---
+
+## Project Structure
+
+```bash
+AI-Placement-Copilot/
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── app/
+│   ├── api/
+│   ├── services/
+│   ├── models/
+│   ├── schemas/
+│   └── db/
+│
+├── requirements.txt
+├── Dockerfile
+└── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Installation
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Clone Repository
+
+```bash
+git clone https://github.com/code-spark648/ai-placement-copilot.git
+
+cd ai-placement-copilot
 ```
+
+---
+
+### Backend Setup
+
+```bash
+python -m venv venv
+
+source venv/bin/activate
+```
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Create a `.env` file:
+
+```env
+DATABASE_URL=your_database_url
+
+GEMINI_API_KEY=your_api_key
+```
+
+Run backend:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+---
+
+### Frontend Setup
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+
+## Future Enhancements
+
+* Real-time interview simulation
+* Voice-based mock interviews
+* Company-specific preparation tracks
+* Placement analytics dashboard
+* Resume version tracking
+* AI career mentor chatbot
+
+---
+
+##
+
+---
+
+## License
+
+This project is developed for educational and learning purposes.
