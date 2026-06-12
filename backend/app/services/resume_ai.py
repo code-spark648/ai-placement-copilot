@@ -13,23 +13,19 @@ print("GEMINI KEY FOUND:", API_KEY is not None)
 client = genai.Client(api_key=API_KEY)
 
 async def analyze_resume(resume_text: str):
-
-    try:
-        response = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents="Say OK"
-        )
-
-        print("GEMINI RESPONSE:", response.text)
-
-        return {
-            "ats_score": 80,
-            "skills": ["Python"],
-            "strengths": ["Gemini connected"],
-            "weaknesses": [],
-            "recommendations": []
-        }
-
-    except Exception as e:
-        print("GEMINI ERROR:", str(e))
-        raise
+    return {
+        "ats_score": 80,
+        "skills": ["Python", "SQL", "FastAPI"],
+        "strengths": [
+            "Good technical background",
+            "Clear resume structure"
+        ],
+        "weaknesses": [
+            "Need more project experience"
+        ],
+        "recommendations": [
+            "Add quantified achievements",
+            "Add internship experience",
+            "Improve ATS keywords"
+        ]
+    }
