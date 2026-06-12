@@ -19,7 +19,7 @@ export default function Resume() {
       setLoading(true);
 
      const response = await api.post(
-  "http://127.0.0.1:8000/resume/upload",
+  "/resume/upload",
   formData,
   {
     headers: {
@@ -27,7 +27,6 @@ export default function Resume() {
     },
   }
 );
-
       setResult(response.data);
     } catch (error: any) {
   console.log("FULL ERROR:", error);
